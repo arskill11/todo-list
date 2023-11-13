@@ -27,12 +27,10 @@ export const createLayout = (() => {
 
     sidebar.appendChild(projContainer);
     sidebar.appendChild(addProjectBtn);
-
     pageHat.appendChild(header);
     pageHat.appendChild(sidebar);
     pageHat.appendChild(mainContent);
     pageHat.appendChild(footer);
-
     mainContent.appendChild(taskList);
     mainContent.appendChild(addTaskBtn);  
     
@@ -51,7 +49,7 @@ export const createLayout = (() => {
             deleteProjectDiv.setAttribute('data-del-proj-ind', i);
 
             projectDiv.textContent = parseArray[i].projectName;
-            deleteProjectDiv.textContent = '-';
+            deleteProjectDiv.textContent = '--';
 
             projectContainerDiv.appendChild(projectDiv);
             projectContainerDiv.appendChild(deleteProjectDiv);
@@ -108,7 +106,6 @@ export const createLayout = (() => {
             taskDiv.appendChild(dueToDiv);
             taskDiv.appendChild(priorityDiv);
             taskDiv.appendChild(btnContainer);
-            //taskList.appendChild(projectNameTop);
             taskList.appendChild(taskDiv);
     
             deleteBtn.addEventListener('click', handleDelete);
@@ -129,7 +126,6 @@ export const createLayout = (() => {
         demonstrateProjects();
         demonstrateTasks();
     }
-
 
     return {
         addTaskBtn,
@@ -168,7 +164,6 @@ export const dialogF = (() => {
     const dueToContainer = document.createElement('div');
     const priorityContainer = document.createElement('div');
 
-
     form.classList.add('inputForm');
     titleContainer.classList.add('inputContainer');
     descriptionContainer.classList.add('inputContainer');
@@ -179,7 +174,7 @@ export const dialogF = (() => {
     adminBtnContainer.classList.add('adminBtnContainer');
     descriptionInput.setAttribute('rows', '3');
     descriptionInput.setAttribute('cols', '35');
-
+    titleInput.setAttribute('maxlength', '35');
     titleInput.setAttribute('id', 'title');
     titleInputLabel.setAttribute('for', 'title');
     descriptionInput.setAttribute('id', 'description');
@@ -258,12 +253,12 @@ export const dialogP = (() => {
 
     projectNameInput.setAttribute('id', 'projectName');
     projectNameInputLabel.setAttribute('for', 'projectName');
+    projectNameInput.setAttribute('maxlength', '50');
 
     inputCont.appendChild(projectNameInputLabel);
     inputCont.appendChild(projectNameInput);  
     btnCont.appendChild(projectNameAddBtn); 
     projectForm.appendChild(inputCont);
-
     dialogProject.appendChild(projectForm);
     dialogProject.appendChild(btnCont);
 
@@ -353,6 +348,7 @@ function deleteProject (e) {
             array.splice(i, 1);
         }
     } 
+    
     localStorage.setItem('projectArray', JSON.stringify(array));
     createLayout.refreshPage();
 }
