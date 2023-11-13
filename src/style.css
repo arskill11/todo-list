@@ -83,12 +83,6 @@ body {
     order: 2;
 }
 
-/*#dialogP,
-#dialogF {
-    display: flex;
-    justify-content: center;
-}*/
-
 .inputForm {
     display: flex;
     flex-direction: column;
@@ -228,12 +222,6 @@ label {
     font-weight: bold;
 }
 
-.active {
-    color: white;
-    font-size: calc(1em+0.2rem);
-    font-weight: bold;
-}
-
 .projectDiv,
 .titleDiv,
 .descriptionDiv,
@@ -244,4 +232,5 @@ label {
 
 .projectDiv {
     overflow: auto;
+    flex: 1;
 }
