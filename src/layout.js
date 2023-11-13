@@ -115,7 +115,7 @@ export const createLayout = (() => {
     }
 
     function clearTaskList () {
-        while (taskList.childElementCount > 0) {
+        while (taskList.childElementCount) {
             taskList.removeChild(taskList.lastChild);
         }
     }

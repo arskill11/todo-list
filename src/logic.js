@@ -1,4 +1,4 @@
-import { createLayout, dialogP } from './layout';
+import { createLayout, dialogForProjects } from './layout';
 
 export function Project (projectName) {
     let array = [];
