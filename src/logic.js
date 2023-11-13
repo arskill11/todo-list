@@ -22,8 +22,6 @@ export const logic = (() => {
         const arr = JSON.parse(localStorage.getItem('projectArray'));
         arr[index].array.push(createTask(title, description, dueto, priority));
         localStorage.setItem('projectArray', JSON.stringify(arr));
-        //projectArray[index].array.push(createTask(title, description, dueto, priority));
-        //localStorage.setItem('projectArray', JSON.stringify(projectArray));
     }
 
     function editTask (indexArr, indexTask,  newTitle, newDescription, newDueto, newPriority) {
@@ -33,16 +31,7 @@ export const logic = (() => {
         arr[indexArr].array[indexTask].dueto = newDueto;
         arr[indexArr].array[indexTask].priority = newPriority;
 
-        /*projectArray[indexArr].array[indexTask].title = newTitle;
-        projectArray[indexArr].array[indexTask].description = newDescription;
-        projectArray[indexArr].array[indexTask].dueto = newDueto;
-        projectArray[indexArr].array[indexTask].priority = newPriority;*/
         localStorage.setItem('projectArray', JSON.stringify(arr));
-
-        /*projectArray[indexArr].array[indexTask].title = newTitle;
-        projectArray[indexArr].array[indexTask].description = newDescription;
-        projectArray[indexArr].array[indexTask].dueto = newDueto;
-        projectArray[indexArr].array[indexTask].priority = newPriority;*/
     }
 
     function deaf () {
@@ -56,9 +45,6 @@ export const logic = (() => {
     }
 
     deaf();
-
-    //createLayout.demonstrateProjects();
-    //createLayout.demonstrateTasks();
  
     return {
         createProject,
@@ -67,46 +53,9 @@ export const logic = (() => {
         editTask,
         deaf,
     }
-    /*const allTaskArray = [];
-    const todayTaskArray = [];
-;
-    function createAllTask (title, description, dueto, priority) {
-        let obj = {title, description, dueto, priority};
-        allTaskArray.push(obj);
-        console.log(allTaskArray);
-    }
-
-    function createTodayTask (title, description, dueto, priority) {
-        let obj = {title, description, dueto, priority};
-        todayTaskArray.push(obj);
-        console.log(allTaskArray);
-    }
-
-    function updateAllTask (newTitle, newDescription, newDueto, newPriority, index) {
-        allTaskArray[index].title = newTitle;
-        allTaskArray[index].description = newDescription;
-        allTaskArray[index].dueto = newDueto;
-        allTaskArray[index].priority = newPriority;
-    }
-
-    function updateTodayTask (newTitle, newDescription, newDueto, newPriority, index) {
-        todayTaskArray[index].title = newTitle;
-        todayTaskArray[index].description = newDescription;
-        todayTaskArray[index].dueto = newDueto;
-        todayTaskArray[index].priority = newPriority;
-    }
-
-    return {
-        allTaskArray,
-        createAllTask,
-        updateAllTask,
-        todayTaskArray,
-        createTodayTask,
-        updateTodayTask,
-    }*/
 })();
 
 createLayout.demonstrateProjects();
-dialogP.indexP = 0;
+dialogForProjects.indexP = 0;
 createLayout.demonstrateTasks();
 

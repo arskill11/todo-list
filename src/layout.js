@@ -69,9 +69,9 @@ export const createLayout = (() => {
         const arr = JSON.parse(localStorage.getItem('projectArray'));
         const projectNameTop = document.createElement('div');
         projectNameTop.classList.add('projectNameTop');
-        projectNameTop.textContent = arr[dialogP.indexP].projectName;
+        projectNameTop.textContent = arr[dialogForProjects.indexP].projectName;
 
-        for (let i = 0; i < arr[dialogP.indexP].array.length; i++) {
+        for (let i = 0; i < arr[dialogForProjects.indexP].array.length; i++) {
             const taskDiv = document.createElement('div');
             const titleDiv = document.createElement('div');
             const descriptionDiv = document.createElement('div');
@@ -92,10 +92,10 @@ export const createLayout = (() => {
             editBtn.setAttribute('data-edit-ind', i);
             deleteBtn.setAttribute('data-del-ind', i);
 
-            titleDiv.textContent = arr[dialogP.indexP].array[i].title;
-            descriptionDiv.textContent = arr[dialogP.indexP].array[i].description;
-            dueToDiv.textContent = arr[dialogP.indexP].array[i].dueto;
-            priorityDiv.textContent = arr[dialogP.indexP].array[i].priority;
+            titleDiv.textContent = arr[dialogForProjects.indexP].array[i].title;
+            descriptionDiv.textContent = arr[dialogForProjects.indexP].array[i].description;
+            dueToDiv.textContent = arr[dialogForProjects.indexP].array[i].dueto;
+            priorityDiv.textContent = arr[dialogForProjects.indexP].array[i].priority;
             editBtn.textContent = 'Edit';
             deleteBtn.textContent = 'Delete';
 
@@ -140,7 +140,7 @@ export const createLayout = (() => {
 })();
 
 
-export const dialogF = (() => {
+export const dialogForTasks = (() => {
     let index;
 
     const dialog = document.querySelector('#dialogF');
@@ -235,9 +235,9 @@ export const dialogF = (() => {
     }
 })();
 
-export const dialogP = (() => {
+export const dialogForProjects = (() => {
     let indexP;
-    const dialogProject = document.querySelector('#dialogP');
+    const dialogForProjectsroject = document.querySelector('#dialogP');
     const projectForm = document.createElement('form');
     const projectNameInput = document.createElement('input');
     const projectNameInputLabel = document.createElement('label');
@@ -259,11 +259,11 @@ export const dialogP = (() => {
     inputCont.appendChild(projectNameInput);  
     btnCont.appendChild(projectNameAddBtn); 
     projectForm.appendChild(inputCont);
-    dialogProject.appendChild(projectForm);
-    dialogProject.appendChild(btnCont);
+    dialogForProjectsroject.appendChild(projectForm);
+    dialogForProjectsroject.appendChild(btnCont);
 
     function showDialog () {
-        dialogProject.showModal();
+        dialogForProjectsroject.showModal();
     }
 
     return {
@@ -271,54 +271,54 @@ export const dialogP = (() => {
         projectNameAddBtn,
         projectNameInput,
         projectForm,
-        dialogProject,
+        dialogForProjectsroject,
         indexP,
     }
 })();
 
 createLayout.addProjectBtn.addEventListener('click', () => {
-    dialogP.showDialog();
+    dialogForProjects.showDialog();
 })
 
-dialogP.projectNameAddBtn.addEventListener('click', () => {
-    logic.createProject(dialogP.projectNameInput.value);
+dialogForProjects.projectNameAddBtn.addEventListener('click', () => {
+    logic.createProject(dialogForProjects.projectNameInput.value);
     createLayout.refreshPage();
-    dialogP.projectForm.reset();
-    dialogP.dialogProject.close();
+    dialogForProjects.projectForm.reset();
+    dialogForProjects.dialogForProjectsroject.close();
 })
 
 createLayout.addTaskBtn.addEventListener('click', (e) => {
-    dialogF.adminBtnContainer.appendChild(dialogF.submitBtnDialog);
-    dialogF.showDialog();
-    console.log(dialogF.dialog);
+    dialogForTasks.adminBtnContainer.appendChild(dialogForTasks.submitBtnDialog);
+    dialogForTasks.showDialog();
+    console.log(dialogForTasks.dialog);
 })
 
-dialogF.submitBtnDialog.addEventListener('click', (e) => {
-    console.log(dialogP.indexP);
-    logic.addTasks(dialogP.indexP, dialogF.titleInput.value, dialogF.descriptionInput.value, dialogF.dueToInput.value, dialogF.priorityInput.value);
+dialogForTasks.submitBtnDialog.addEventListener('click', (e) => {
+    console.log(dialogForProjects.indexP);
+    logic.addTasks(dialogForProjects.indexP, dialogForTasks.titleInput.value, dialogForTasks.descriptionInput.value, dialogForTasks.dueToInput.value, dialogForTasks.priorityInput.value);
     createLayout.refreshPage();
-    dialogF.form.reset();
-    dialogF.dialog.close();
+    dialogForTasks.form.reset();
+    dialogForTasks.dialog.close();
 
-    dialogF.adminBtnContainer.removeChild(dialogF.submitBtnDialog);
+    dialogForTasks.adminBtnContainer.removeChild(dialogForTasks.submitBtnDialog);
 })
 
-dialogF.editBtnDialog.addEventListener('click', (e) => {
-    logic.editTask(dialogP.indexP, dialogF.index, dialogF.titleInput.value, dialogF.descriptionInput.value, dialogF.dueToInput.value, dialogF.priorityInput.value, dialogF.index);
+dialogForTasks.editBtnDialog.addEventListener('click', (e) => {
+    logic.editTask(dialogForProjects.indexP, dialogForTasks.index, dialogForTasks.titleInput.value, dialogForTasks.descriptionInput.value, dialogForTasks.dueToInput.value, dialogForTasks.priorityInput.value, dialogForTasks.index);
     createLayout.refreshPage();
-    dialogF.form.reset();
-    dialogF.dialog.close();
+    dialogForTasks.form.reset();
+    dialogForTasks.dialog.close();
 
-    dialogF.adminBtnContainer.removeChild(dialogF.editBtnDialog);
+    dialogForTasks.adminBtnContainer.removeChild(dialogForTasks.editBtnDialog);
 })
 
 function handleDelete (e) {
     const array = JSON.parse(localStorage.getItem('projectArray'));
-    dialogF.index = e.target.getAttribute('data-del-ind');
-    console.log(dialogF.index);
-    for (let i = 0; i < array[dialogP.indexP].array.length; i++) {
-        if (i == dialogF.index) {
-            array[dialogP.indexP].array.splice(i, 1);
+    dialogForTasks.index = e.target.getAttribute('data-del-ind');
+    console.log(dialogForTasks.index);
+    for (let i = 0; i < array[dialogForProjects.indexP].array.length; i++) {
+        if (i == dialogForTasks.index) {
+            array[dialogForProjects.indexP].array.splice(i, 1);
         }
     } 
     localStorage.setItem('projectArray', JSON.stringify(array));
@@ -328,16 +328,16 @@ function handleDelete (e) {
 function handleEdit (e) {
     const array = JSON.parse(localStorage.getItem('projectArray'));
 
-    dialogF.index = e.target.getAttribute('data-edit-ind');
-    dialogF.adminBtnContainer.appendChild(dialogF.editBtnDialog);
-    console.log(dialogF.index);
+    dialogForTasks.index = e.target.getAttribute('data-edit-ind');
+    dialogForTasks.adminBtnContainer.appendChild(dialogForTasks.editBtnDialog);
+    console.log(dialogForTasks.index);
 
-    dialogF.titleInput.value = array[dialogP.indexP].array[dialogF.index].title;
-    dialogF.descriptionInput.value = array[dialogP.indexP].array[dialogF.index].description;
-    dialogF.dueToInput.value = array[dialogP.indexP].array[dialogF.index].dueto;
-    dialogF.priorityInput.value = array[dialogP.indexP].array[dialogF.index].priority;
+    dialogForTasks.titleInput.value = array[dialogForProjects.indexP].array[dialogForTasks.index].title;
+    dialogForTasks.descriptionInput.value = array[dialogForProjects.indexP].array[dialogForTasks.index].description;
+    dialogForTasks.dueToInput.value = array[dialogForProjects.indexP].array[dialogForTasks.index].dueto;
+    dialogForTasks.priorityInput.value = array[dialogForProjects.indexP].array[dialogForTasks.index].priority;
 
-    dialogF.showDialog();
+    dialogForTasks.showDialog();
 }
 
 function deleteProject (e) {
@@ -356,10 +356,10 @@ function deleteProject (e) {
 function switchToProject (e) {
     const array = JSON.parse(localStorage.getItem('projectArray'));
     console.log(e.target);
-    dialogP.indexP = e.target.getAttribute('data-proj-ind');
-    console.log(dialogP.indexP);
+    dialogForProjects.indexP = e.target.getAttribute('data-proj-ind');
+    console.log(dialogForProjects.indexP);
     for (let i = 0; i < array.length; i++) {
-        if (i == dialogP.indexP) {
+        if (i == dialogForProjects.indexP) {
             createLayout.clearTaskList();
             createLayout.demonstrateTasks();
         }
