@@ -1,0 +1,232 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.pageHat {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1.7fr 6fr;
+    grid-template-rows: 1fr 7fr 0.5fr;
+
+    background-color: azure;
+}
+
+.header {
+    grid-area: 1 / 1 / 2 / -1;
+
+    background-color: rgb(198, 228, 255);
+    font-size: 3rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar {
+    grid-area: 2 / 1 / 3 / 2;
+
+    background-color: rgb(147, 147, 255);
+    font-weight: 1.5rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.projContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 2rem;
+}
+.projectContainerDiv {
+    display:flex;
+    justify-content: space-between;
+}
+
+.footer {
+    grid-area: 3 / 1 / 4 / -1;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(138, 138, 138);
+}
+
+.mainContent {
+    grid-area: 2 / 2 / 3 / 3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 20px;
+}
+
+.projectNameTop {
+    order: 1;
+    font-size: 3rem;
+    color: rgb(89, 89, 89);
+    font-weight: bold;
+}
+
+.taskDiv {
+    order: 2;
+}
+
+/*#dialogP,
+#dialogF {
+    display: flex;
+    justify-content: center;
+}*/
+
+.inputForm {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+.taskList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.taskDiv {
+    width: 80%;
+    height: min-content;
+
+    display: grid;
+    grid-template-rows: 1fr 2fr 0.5fr;
+    grid-template-columns: 9fr 1fr 1fr;
+    background-color: lightcyan;
+    padding: 4px;
+    font-size: 1.5rem;
+    padding: 20px;
+}
+
+.titleDiv {
+    grid-area: 1 / 1 / 2 / 2;
+    font-weight: bold;
+}
+
+.descriptionDiv {
+    grid-area: 2 / 1 / 3 / 3; 
+}
+
+.dueToDiv {
+    grid-area: 3 / 1 / 4 / 3;
+}
+
+.priorityDiv {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.btnCont{
+    grid-area: 1 / 3 / -1 / -1;
+    /*align-self: center;*/
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 4px;
+}
+
+.addProjectBtn,
+.addTaskBtn {
+    font-size: 1.2rem;
+    background-color: rgb(68, 0, 255);
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.submitBtnDialog {
+    font-size: 1rem;
+}
+
+.adminBtnContainer {
+    display: flex;
+    justify-content: center;
+    padding-top:10px;
+}
+
+dialog {
+    background-color: rgb(212, 255, 255);
+}
+
+#dialogF {
+    border-radius: 20px;
+    width: 30%;
+    height: 40%;
+}
+
+#dialogP {
+    border-radius: 20px;
+    width: 30%;
+    height: 14%;
+}
+
+#dialogP input {
+    width: 70%;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 5px;
+}
+
+input,
+select {
+    width: 100%;
+    border-radius: 10px;
+    padding-left: 10px;
+    height: 1.5rem;
+    font-size: 1.3rem;
+}
+
+textarea {
+    font-size: 1.3rem;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+select {
+    height: 1.7rem;
+}
+
+label {
+    font-size: 1.3rem;
+    padding-left: 3px;
+}
+
+.editBtnDialog,
+.submitBtnDialog,
+.projectNameAddBtn,
+.editBtn,
+.deleteBtn {
+    border-radius: 10px;
+    background-color: rgb(0, 173, 159);
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.active {
+    color: white;
+    font-size: calc(1em+0.2rem);
+    font-weight: bold;
+}
