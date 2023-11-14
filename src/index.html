@@ -8,8 +8,60 @@
     </title>
 </head>
 <body>
-    <dialog id="dialogF"></dialog>
-    <dialog id="dialogP"></dialog>
-    <div class="pageHat"></div>
+    <dialog id="dialogForTasks">
+        <form action="#" method="get" class="inputForm">
+            <div class="inputContainer">
+                <label for="title" maxlength="35">*Task</label>
+                <input type="text" id="title" name="title">
+            </div>
+            <div class="inputContainer">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="35" rows="3"></textarea>
+            </div>
+            <div class="inputContainer">
+                <label for="dueTo">*Due to</label>
+                <input type="date" id="dueTo" name="dueTo">
+            </div>
+            <div class="inputContainer">
+                <label for="priority">*Priority</label>
+                <select name="priority" id="priority">
+                    <option value="High">High</option>
+                    <option value="Mid">Mid</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+
+            <div class="adminBtnContainer">
+            </div>
+
+        </form>
+    </dialog>
+
+    <dialog id="dialogForProjects">
+        <form action="#" method="get" id="projectForm">
+            <div class="inputContainer">
+                <label for="projectName">*Project Name</label>
+                <input type="text" id="projectName" maxlength="50">
+            </div>
+            <div class="adminBtnContainer">
+                <button class="projectNameAddBtn">Add project</button>
+            </div>
+        </form>
+    </dialog>
+
+
+    <div class="pageHat">
+        <header><h1 class="header">TODO LIST</header>
+        <aside class="aside">
+            <li class="projContainer">
+            </li>
+            <button class="addProjectBtn">Add project</button>
+        </aside>
+        <main class="mainContent">
+            <div class="taskList"></div>
+            <button class="addTaskBtn">Add task</button>
+        </main>
+        <footer class="footer">Developed by 17thspring'</footer>
+    </div>
 </body>
 </html>

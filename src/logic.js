@@ -1,7 +1,7 @@
-import { createLayout, dialogForProjects } from './layout';
+import { layout, dialogForProjects } from './layout';
 
 export function Project (projectName) {
-    let array = [];
+    const array = [];
     return { projectName, array};
 } 
 
@@ -13,28 +13,28 @@ export const logic = (() => {
     const projectArray = [];
 
     function createProject (projectName) {
-        const arr = JSON.parse(localStorage.getItem('projectArray'));
+        const arr = getLocalStorageArray();
         arr.push(Project(projectName));
-        localStorage.setItem('projectArray', JSON.stringify(arr));
+        setLocalStorageArray(arr);
     }
 
     function addTasks (index, title, description, dueto, priority) {
-        const arr = JSON.parse(localStorage.getItem('projectArray'));
+        const arr = getLocalStorageArray();
         arr[index].array.push(createTask(title, description, dueto, priority));
-        localStorage.setItem('projectArray', JSON.stringify(arr));
+        setLocalStorageArray(arr);
     }
 
     function editTask (indexArr, indexTask,  newTitle, newDescription, newDueto, newPriority) {
-        const arr = JSON.parse(localStorage.getItem('projectArray'));
+        const arr = getLocalStorageArray();
         arr[indexArr].array[indexTask].title = newTitle;
         arr[indexArr].array[indexTask].description = newDescription;
         arr[indexArr].array[indexTask].dueto = newDueto;
         arr[indexArr].array[indexTask].priority = newPriority;
 
-        localStorage.setItem('projectArray', JSON.stringify(arr));
+        setLocalStorageArray(arr);
     }
 
-    function deaf () {
+    function createStartTasks () {
         if (!localStorage.getItem('projectArray') || !JSON.parse(localStorage.getItem('projectArray')).length){
             localStorage.setItem('projectArray', JSON.stringify(projectArray));
             createProject('Everyday Routine');
@@ -44,18 +44,25 @@ export const logic = (() => {
         }
     }
 
-    deaf();
+    createStartTasks();
  
     return {
         createProject,
         addTasks,
         projectArray,
         editTask,
-        deaf,
+        createStartTasks,
     }
 })();
 
-createLayout.demonstrateProjects();
+layout.demonstrateProjects();
 dialogForProjects.indexP = 0;
-createLayout.demonstrateTasks();
+layout.demonstrateTasks();
 
+export function getLocalStorageArray () {
+    return JSON.parse(localStorage.getItem('projectArray'));
+}
+
+export function setLocalStorageArray (arr) {
+    localStorage.setItem('projectArray', JSON.stringify(arr));
+}

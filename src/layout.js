@@ -1,45 +1,18 @@
-import { logic } from './logic';
+import { logic, getLocalStorageArray, setLocalStorageArray } from './logic';
 
-export const createLayout = (() => {
-    const pageHat = document.querySelector('.pageHat');
-    const header = document.createElement('div');
-    const sidebar = document.createElement('div');
-    const mainContent = document.createElement('div');
-    const footer = document.createElement('div');
-    const addTaskBtn = document.createElement('button');
-    const taskList = document.createElement('div');
-    const projContainer = document.createElement('div');
-    const addProjectBtn = document.createElement('button');
-
-    header.classList.add('header');
-    sidebar.classList.add('sidebar');
-    footer.classList.add('footer');
-    mainContent.classList.add('mainContent');
-    addTaskBtn.classList.add('addTaskBtn');
-    projContainer.classList.add('projContainer');
-    addProjectBtn.classList.add('addProjectBtn');
-    taskList.classList.add('taskList');
-
-    header.textContent = 'TODO LIST';
-    footer.textContent = 'Developed by 17thspring';
-    addTaskBtn.textContent = 'Add task';
-    addProjectBtn.textContent = 'Add project';
-
-    sidebar.appendChild(projContainer);
-    sidebar.appendChild(addProjectBtn);
-    pageHat.appendChild(header);
-    pageHat.appendChild(sidebar);
-    pageHat.appendChild(mainContent);
-    pageHat.appendChild(footer);
-    mainContent.appendChild(taskList);
-    mainContent.appendChild(addTaskBtn);  
+function createLayout () {
+    const mainContent = document.querySelector('.mainContent');
+    const addTaskBtn = document.querySelector('.addTaskBtn');
+    const taskList = document.querySelector('.taskList');
+    const projContainer = document.querySelector('.projContainer');
+    const addProjectBtn = document.querySelector('.addProjectBtn');
     
     function demonstrateProjects () {
-        const parseArray = JSON.parse(localStorage.getItem('projectArray'));
+        const parseArray = getLocalStorageArray();
         for (let i = 0; i < parseArray.length; i++) {
-            const projectContainerDiv = document.createElement('div');
-            const projectDiv = document.createElement('div');
-            const deleteProjectDiv = document.createElement('div');
+            const projectContainerDiv = document.createElement('li');
+            const projectDiv = document.createElement('p');
+            const deleteProjectDiv = document.createElement('p');
 
             projectDiv.classList.add('projectDiv');
             deleteProjectDiv.classList.add('deleteProjectDiv');
@@ -66,15 +39,15 @@ export const createLayout = (() => {
     }
 
     function demonstrateTasks () {
-        const arr = JSON.parse(localStorage.getItem('projectArray'));
-        const projectNameTop = document.createElement('div');
+        const arr = getLocalStorageArray();
+        const projectNameTop = document.createElement('h2');
         projectNameTop.classList.add('projectNameTop');
         projectNameTop.textContent = arr[dialogForProjects.indexP].projectName;
 
         for (let i = 0; i < arr[dialogForProjects.indexP].array.length; i++) {
             const taskDiv = document.createElement('div');
-            const titleDiv = document.createElement('div');
-            const descriptionDiv = document.createElement('div');
+            const titleDiv = document.createElement('h3');
+            const descriptionDiv = document.createElement('p');
             const dueToDiv = document.createElement('div');
             const priorityDiv = document.createElement('div');
             const editBtn = document.createElement('button');
@@ -137,84 +110,29 @@ export const createLayout = (() => {
         refreshPage,
         projContainer,
     };
-})();
+}
 
+export const layout = createLayout();
 
 export const dialogForTasks = (() => {
     let index;
 
-    const dialog = document.querySelector('#dialogF');
-    const form = document.createElement('form');
-    const titleInput = document.createElement('input');
-    const titleInputLabel = document.createElement('label');
-    const descriptionInput = document.createElement('textarea');
-    const descriptionInputLabel = document.createElement('label');
-    const dueToInput = document.createElement('input');
-    const dueToInputLabel = document.createElement('label');
-    const priorityInput = document.createElement('select');
-    const priorityInputLabel = document.createElement('label');
-    const highPrioriry = document.createElement('option');
-    const midPriority = document.createElement('option');
-    const lowPriority = document.createElement('option');
+    const dialog = document.querySelector('#dialogForTasks');
+    const adminBtnContainer = document.querySelector('.adminBtnContainer');
+    const form = document.querySelector('.inputForm');
+    const titleInput = document.querySelector('#title');
+    const descriptionInput = document.querySelector('#description');
+    const dueToInput = document.querySelector('#dueTo');
+    const priorityInput = document.querySelector('#priority');
+
     const submitBtnDialog = document.createElement('button');
     const editBtnDialog = document.createElement('button');
-    const adminBtnContainer = document.createElement('div');
-    const titleContainer = document.createElement('div');
-    const descriptionContainer = document.createElement('div');
-    const dueToContainer = document.createElement('div');
-    const priorityContainer = document.createElement('div');
 
-    form.classList.add('inputForm');
-    titleContainer.classList.add('inputContainer');
-    descriptionContainer.classList.add('inputContainer');
-    dueToContainer.classList.add('inputContainer');
-    priorityContainer.classList.add('inputContainer');
     submitBtnDialog.classList.add('submitBtnDialog');
     editBtnDialog.classList.add('editBtnDialog');
-    adminBtnContainer.classList.add('adminBtnContainer');
-    descriptionInput.setAttribute('rows', '3');
-    descriptionInput.setAttribute('cols', '35');
-    titleInput.setAttribute('maxlength', '35');
-    titleInput.setAttribute('id', 'title');
-    titleInputLabel.setAttribute('for', 'title');
-    descriptionInput.setAttribute('id', 'description');
-    descriptionInputLabel.setAttribute('for', 'description');
-    dueToInput.setAttribute('id', 'dueTo');
-    dueToInput.setAttribute('type', 'date');
-    dueToInputLabel.setAttribute('for', 'dueTo');
-    priorityInput.setAttribute('id', 'priority');
-    priorityInputLabel.setAttribute('for', 'priority');
 
-    titleInputLabel.textContent = 'Task';
-    descriptionInputLabel.textContent = 'Description';
-    dueToInputLabel.textContent = 'Due to';
-    priorityInputLabel.textContent = 'Priority';
-    highPrioriry.value = 'High';
-    highPrioriry.textContent = 'High';
-    midPriority.value = 'Mid';
-    midPriority.textContent = 'Mid';
-    lowPriority.value = 'Low';
-    lowPriority.textContent = 'Low';
     submitBtnDialog.textContent = 'Submit';
     editBtnDialog.textContent = 'Submit';
-
-    priorityInput.appendChild(highPrioriry);
-    priorityInput.appendChild(midPriority);
-    priorityInput.appendChild(lowPriority);
-    titleContainer.appendChild(titleInputLabel);
-    titleContainer.appendChild(titleInput);
-    descriptionContainer.appendChild(descriptionInputLabel);
-    descriptionContainer.appendChild(descriptionInput);
-    dueToContainer.appendChild(dueToInputLabel);
-    dueToContainer.appendChild(dueToInput);
-    priorityContainer.appendChild(priorityInputLabel);
-    priorityContainer.appendChild(priorityInput);
-    form.appendChild(titleContainer);
-    form.appendChild(descriptionContainer);
-    form.appendChild(dueToContainer);
-    form.appendChild(priorityContainer);
-    dialog.appendChild(form);
-    dialog.appendChild(adminBtnContainer);
 
     function showDialog () {
         dialog.showModal();
@@ -237,33 +155,13 @@ export const dialogForTasks = (() => {
 
 export const dialogForProjects = (() => {
     let indexP;
-    const dialogForProjectsroject = document.querySelector('#dialogP');
-    const projectForm = document.createElement('form');
-    const projectNameInput = document.createElement('input');
-    const projectNameInputLabel = document.createElement('label');
-    const projectNameAddBtn = document.createElement('button');
-    const inputCont = document.createElement('div');
-    const btnCont = document.createElement('div');
-
-    projectNameAddBtn.classList.add('projectNameAddBtn');
-    projectNameInputLabel.textContent = 'Project Name';
-    projectNameAddBtn.textContent = 'Add project';
-    inputCont.classList.add('inputContainer');
-    btnCont.classList.add('adminBtnContainer');
-
-    projectNameInput.setAttribute('id', 'projectName');
-    projectNameInputLabel.setAttribute('for', 'projectName');
-    projectNameInput.setAttribute('maxlength', '50');
-
-    inputCont.appendChild(projectNameInputLabel);
-    inputCont.appendChild(projectNameInput);  
-    btnCont.appendChild(projectNameAddBtn); 
-    projectForm.appendChild(inputCont);
-    dialogForProjectsroject.appendChild(projectForm);
-    dialogForProjectsroject.appendChild(btnCont);
+    const dialogForProject= document.querySelector('#dialogForProjects');
+    const projectNameInput = document.querySelector('#projectName');
+    const projectForm = document.querySelector('#projectForm');
+    const projectNameAddBtn = document.querySelector('.projectNameAddBtn');
 
     function showDialog () {
-        dialogForProjectsroject.showModal();
+        dialogForProject.showModal();
     }
 
     return {
@@ -271,49 +169,47 @@ export const dialogForProjects = (() => {
         projectNameAddBtn,
         projectNameInput,
         projectForm,
-        dialogForProjectsroject,
+        dialogForProject,
         indexP,
     }
 })();
 
-createLayout.addProjectBtn.addEventListener('click', () => {
+layout.addProjectBtn.addEventListener('click', () => {
     dialogForProjects.showDialog();
 })
 
 dialogForProjects.projectNameAddBtn.addEventListener('click', () => {
     logic.createProject(dialogForProjects.projectNameInput.value);
-    createLayout.refreshPage();
+    layout.refreshPage();
     dialogForProjects.projectForm.reset();
-    dialogForProjects.dialogForProjectsroject.close();
+    dialogForProjects.dialogForProject.close();    
 })
 
-createLayout.addTaskBtn.addEventListener('click', (e) => {
+layout.addTaskBtn.addEventListener('click', (e) => {
+    while (dialogForTasks.adminBtnContainer.childElementCount > 0) {
+        dialogForTasks.adminBtnContainer.removeChild(dialogForTasks.adminBtnContainer.lastChild);
+    }
     dialogForTasks.adminBtnContainer.appendChild(dialogForTasks.submitBtnDialog);
     dialogForTasks.showDialog();
     console.log(dialogForTasks.dialog);
 })
 
 dialogForTasks.submitBtnDialog.addEventListener('click', (e) => {
-    console.log(dialogForProjects.indexP);
     logic.addTasks(dialogForProjects.indexP, dialogForTasks.titleInput.value, dialogForTasks.descriptionInput.value, dialogForTasks.dueToInput.value, dialogForTasks.priorityInput.value);
-    createLayout.refreshPage();
+    layout.refreshPage();
     dialogForTasks.form.reset();
-    dialogForTasks.dialog.close();
-
-    dialogForTasks.adminBtnContainer.removeChild(dialogForTasks.submitBtnDialog);
+    dialogForTasks.dialog.close();    
 })
 
 dialogForTasks.editBtnDialog.addEventListener('click', (e) => {
     logic.editTask(dialogForProjects.indexP, dialogForTasks.index, dialogForTasks.titleInput.value, dialogForTasks.descriptionInput.value, dialogForTasks.dueToInput.value, dialogForTasks.priorityInput.value, dialogForTasks.index);
-    createLayout.refreshPage();
+    layout.refreshPage();
     dialogForTasks.form.reset();
     dialogForTasks.dialog.close();
-
-    dialogForTasks.adminBtnContainer.removeChild(dialogForTasks.editBtnDialog);
 })
 
 function handleDelete (e) {
-    const array = JSON.parse(localStorage.getItem('projectArray'));
+    const array = getLocalStorageArray();
     dialogForTasks.index = e.target.getAttribute('data-del-ind');
     console.log(dialogForTasks.index);
     for (let i = 0; i < array[dialogForProjects.indexP].array.length; i++) {
@@ -321,14 +217,17 @@ function handleDelete (e) {
             array[dialogForProjects.indexP].array.splice(i, 1);
         }
     } 
-    localStorage.setItem('projectArray', JSON.stringify(array));
-    createLayout.refreshPage();
+    setLocalStorageArray(array);
+    layout.refreshPage();
 }
 
 function handleEdit (e) {
-    const array = JSON.parse(localStorage.getItem('projectArray'));
-
+    const array = getLocalStorageArray();
     dialogForTasks.index = e.target.getAttribute('data-edit-ind');
+
+    while (dialogForTasks.adminBtnContainer.childElementCount > 0) {
+        dialogForTasks.adminBtnContainer.removeChild(dialogForTasks.adminBtnContainer.lastChild);
+    }
     dialogForTasks.adminBtnContainer.appendChild(dialogForTasks.editBtnDialog);
     console.log(dialogForTasks.index);
 
@@ -341,28 +240,25 @@ function handleEdit (e) {
 }
 
 function deleteProject (e) {
-    const array = JSON.parse(localStorage.getItem('projectArray'));
+    const array = getLocalStorageArray();
     let index = e.target.getAttribute('data-del-proj-ind');
     for (let i = 0; i < array.length; i++) {
         if (i == index) {
             array.splice(i, 1);
         }
     } 
-    
-    localStorage.setItem('projectArray', JSON.stringify(array));
-    createLayout.refreshPage();
+
+    setLocalStorageArray(array);
+    layout.refreshPage();
 }
 
 function switchToProject (e) {
-    const array = JSON.parse(localStorage.getItem('projectArray'));
-    console.log(e.target);
+    const array = getLocalStorageArray();
     dialogForProjects.indexP = e.target.getAttribute('data-proj-ind');
-    console.log(dialogForProjects.indexP);
     for (let i = 0; i < array.length; i++) {
         if (i == dialogForProjects.indexP) {
-            createLayout.clearTaskList();
-            createLayout.demonstrateTasks();
+            layout.clearTaskList();
+            layout.demonstrateTasks();
         }
     }
 }
-
